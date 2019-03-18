@@ -1,9 +1,18 @@
-const express = require("express");
+const express = require("express"),
+  http = require("http"),
+  https = require("https");
 const app = express();
 const port = 3000;
 const { exec } = require("child_process");
 const fs = require("fs");
 const uuidv1 = require("uuid/v1");
+
+var options = {
+  key: fs.readFileSync("/etc/letsencrypt/live/luabits.xyz/privkey.pem"),
+  cert: fs.readFileSync("/etc/letsencrypt/live/luabits.xyz/cert.pem"),
+  ca: fs.readFileSync("/etc/letsencrypt/live/luabits.xyz/chain.pem")
+};
+
 app.use(express.json());
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -42,4 +51,7 @@ app.post("/", (req, res) => {
   });
 });
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+
+var server = https.createServer(options, app).listen(port, function(){
+  console.log("Express server listening on port " + port);
+});
