@@ -8,9 +8,9 @@ const fs = require("fs");
 const uuidv1 = require("uuid/v1");
 
 var options = {
-  key: fs.readFileSync("/etc/letsencrypt/live/luabits.xyz/privkey.pem"),
-  cert: fs.readFileSync("/etc/letsencrypt/live/luabits.xyz/cert.pem"),
-  ca: fs.readFileSync("/etc/letsencrypt/live/luabits.xyz/chain.pem")
+  key: fs.readFileSync("/etc/letsencrypt/live/compile.luabits.com/privkey.pem"),
+  cert: fs.readFileSync("/etc/letsencrypt/live/compile.luabits.com/cert.pem"),
+  ca: fs.readFileSync("/etc/letsencrypt/live/compile.luabits.com/chain.pem")
 };
 
 app.use(express.json());
